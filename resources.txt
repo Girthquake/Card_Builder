@@ -44,9 +44,11 @@
 	USE STOP/START BUTTON ON MAGELIS
 	Custom
 </ssProcedure>
-<imgw>
-319
-</imgw>
-<imgh>
-229
-</imgh>
+<img>
+	<imgw>
+		319
+	</imgw>
+	<imgh>
+		229
+	</imgh>
+</img>
