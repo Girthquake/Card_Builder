@@ -534,7 +534,7 @@ def Main():
     except:
         pass
     while isgood is False:
-        if Confirm.ask("Would you like to reload your previous file?"):
+        if Confirm.ask("Would you like to reload your previous file? (THIS HAS BEEN UPDATED)"):
             with open('crash.bak', 'rb') as fp:
                 crashsave = pickle.load(fp)
             prnsave=[]
