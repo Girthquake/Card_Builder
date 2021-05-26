@@ -61,8 +61,6 @@ Iname4=""
 Iname5=""
 Iname6=""
 
-version="1.0"
-
 
 class Limages:
     def __init__(self):
@@ -76,7 +74,6 @@ class eStops:
         self.location = ""
 
     def gen_eStops(self):
-        console = Console()
         
         try:
             self.location = Prompt.ask("Location",default=str(self.location))
@@ -87,8 +84,6 @@ class Rlockouts:
         self.location = ""
 
     def gen_remoteLockouts(self):
-        console = Console()
-
         
         try:
             self.location = Prompt.ask("Location",default=str(self.location))  # Python 3
@@ -104,7 +99,6 @@ class Olockouts:
         self.sproced=0
 
     def gen_other(self):
-        console = Console()
         olheader=""
         console.print("Select Other Lockout Types", style="cyan",justify="center")
         for oroom in olist:
@@ -166,7 +160,6 @@ class Elockouts:
 
     #def gen_elect(self,cvolts,svolts,sproced,sbucket):
     def gen_elect(self):
-        console = Console()
         console.print("\nSelect Lockout Voltage", style="cyan",justify="center")
         vheader=""
         for vroom in vlist:
@@ -218,7 +211,6 @@ class Elockouts:
                 self.prrtry = True
 
 def select_PR(prnumber,prnsave):
-    console = Console()
     pr = 0
     prnumber = 0
     prheader= ""
@@ -252,7 +244,6 @@ def select_PR(prnumber,prnsave):
                 invalid_input = False
                 return panelroom, prsave
 def elecLockouts(elsave):
-    console = Console()
     
     eltry = True
     while eltry:
@@ -268,7 +259,6 @@ def elecLockouts(elsave):
             eltry = False
             return el
 def otherLockouts(olsave):
-    console = Console()
     
     oltry = True
     while oltry:
@@ -284,7 +274,6 @@ def otherLockouts(olsave):
             oltry = False
             return ol
 def eStop_count(essave):
-    console = Console()
     estry = True
     while estry:
         try:
@@ -300,7 +289,6 @@ def eStop_count(essave):
             estry = False
             return es
 def remoteLockouts(rlsave):
-    console = Console()
     rltry = True
     while rltry:
         try:
@@ -315,7 +303,6 @@ def remoteLockouts(rlsave):
         if rl < 8:
             return rl
 def shutdownprocedure(sdtype):
-    console = Console()
     Type = 0
     spheader=""
     console.print("Select Shutdown Procedure", style="cyan",justify="center")
@@ -339,7 +326,6 @@ def shutdownprocedure(sdtype):
                 sdtype = Prompt.ask("Input Shutdown Procedure",str(sdtype))
             return sdtype
 def hazard(hz):
-    console = Console()
     global hz1
     hz1 = Prompt.ask("\nIs there a Hazardous energy permit? yes/no",default=str(hz1))
     if hz1 == '' or not hz1[0].lower() in ['y','n']:
@@ -354,7 +340,6 @@ def check_exists(dir):
     isdir = os.path.isdir(dir) 
     return isdir
 def resize_Image(corrected):
-    console = Console()
     try:
         file = corrected
         im = Image.open(file)
@@ -368,7 +353,6 @@ def resize_Image(corrected):
     except IOError as e:
         console.print("No Image", style="red",justify="center")
 def generate_resources():
-    console = Console()
     try:
         with open('resources.txt') as f:
             fr="Found Resources"
@@ -379,8 +363,7 @@ def generate_resources():
             for item in resourcedefault:
                 f.write("%s\n" % item)
 #Main Program
-def Main():
-    global prnumber ,panelroom ,equipnumber ,elv ,el ,imglist ,tempsave ,timage ,prlist ,vlist ,olist ,prolist ,crashsave ,sdtype ,rlsave ,olsave , elsave ,essave ,prsave ,prnsave ,equipname ,hz ,hz1 
+if __name__ == 'main':
     isgood = False
     console = Console()
     try:
@@ -534,7 +517,7 @@ def Main():
     except:
         pass
     while isgood is False:
-        if Confirm.ask("Would you like to reload your previous file? (THIS HAS BEEN UPDATED)"):
+        if Confirm.ask("Would you like to reload your previous file?"):
             with open('crash.bak', 'rb') as fp:
                 crashsave = pickle.load(fp)
             prnsave=[]
@@ -1243,7 +1226,7 @@ def Main():
         #Shutdown Procedure
         ws['R05'] = sp
         #Hazardous Energy
-        ws['B51'] = "Hazardous Energy Permit #" + str(hz)
+        ws['B51'] = "SOP# " + str(hz)
         #create Date
         ws['J54'] = date.today()
 
