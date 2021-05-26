@@ -390,12 +390,14 @@ if __name__ == 'main':
         rl5 = Rlockouts()
         rl6 = Rlockouts()
         rl7 = Rlockouts()
-
-        console.print(Panel("[cyan] test Lockout Card Builder\n\n\n[white]Put any images for the cards in a subfolder layout show below\nAll images will need to be named properly for the program to utilize them\nAn example would be [Panel 2-3-5 2.jpg]\nthe very last number in the name will tell the program what spot to place the image."),justify="center")
+        with open('version', 'rb') as fpv:
+                version = pickle.load(fpv)
+                fpv.close()
+        console.print(Panel("[cyan]Lockout Card Builder\n\n\n[white]Put any images for the cards in a subfolder layout show below\nAll images will need to be named properly for the program to utilize them\nAn example would be [Panel 2-3-5 2.jpg]\nthe very last number in the name will tell the program what spot to place the image.\nv"+version),justify="center")
         console.print("Runing system Checks", style="yellow",justify="center")
         console.print("Checking for required folders", style="yellow",justify="center")
 
-
+     
         #Check for folders and files.
         savepath = r"new/"
         imagepath = r"Photos/"
